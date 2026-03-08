@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../Context/StateProvider";
 import { auth } from "../services/firebase";
 
-function Header() {
+function Header({ search, setSearch }) {
   const [{ basket, user }, dispatch] = useStateValue();
 
   const handleAuthentication = () => {
@@ -24,7 +24,12 @@ function Header() {
       </Link>
 
       <div className="header_search">
-        <input className="header_searchInput" type="text" />
+        <input
+          className="header_searchInput"
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <SearchIcon className="header_searchIcon" />
       </div>
 

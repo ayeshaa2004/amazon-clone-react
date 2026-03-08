@@ -4,10 +4,15 @@ import Subtotal from "./Subtotal";
 // import { useStateValuee } from "../Context/Infocontext";
 import { useStateValue } from "../Context/StateProvider";
 import CheckOutProduct from "./CheckOutProduct";
+import { useEffect } from "react";
 
 function CheckoutPage() {
   // const { total } = useStateValuee();
   const [{ basket, user }, dispatch] = useStateValue();
+
+  useEffect(() => {
+    localStorage.setItem("basket", JSON.stringify(basket));
+  }, [basket]);
 
   return (
     <div className="checkout">

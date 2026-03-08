@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 import Header from "./components/Header.js";
 import Home from "./components/Home.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -11,6 +12,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useStateValue } from "./Context/StateProvider.js";
 
 function App() {
+  const [search, setSearch] = useState("");
   const [{}, dispatch] = useStateValue();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -49,7 +51,7 @@ function App() {
               path="/checkout"
               element={
                 <>
-                  <Header />
+                  <Header search={search} setSearch={setSearch} />
                   <CheckoutPage />
                 </>
               }
@@ -58,8 +60,8 @@ function App() {
               path="/"
               element={
                 <>
-                  <Header />
-                  <Home />
+                  <Header search={search} setSearch={setSearch} />
+                  <Home search={search} />
                 </>
               }
             />
